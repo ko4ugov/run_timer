@@ -1,0 +1,57 @@
+{
+  "name": "run-timer",
+  "displayName": "Run Timer",
+  "description": "Запускает текущий файл и показывает время выполнения",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "runTimer.run",
+        "title": "Run Timer: Запустить файл и измерить время",
+        "icon": "$(play)"
+      },
+      {
+        "command": "runTimer.stop",
+        "title": "Run Timer: Остановить выполнение",
+        "icon": "$(debug-stop)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "runTimer.run",
+          "group": "navigation",
+          "when": "editorTextFocus || resourceScheme == file"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Run Timer",
+      "properties": {
+        "runTimer.commands": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": { "type": "string" },
+          "markdownDescription": "Команды запуска по languageId. Пример: `{ \"python\": \"python3 -u ${file}\" }`. `${file}` заменяется на путь к файлу."
+        },
+        "runTimer.inputFile": {
+        "type": "string",
+        "default": "input.txt",
+        "description": "Файл с входными данными (stdin). Относительный путь считается от папки запускаемого файла."
+        },
+        "runTimer.askInput": {
+          "type": "boolean",
+          "default": false,
+          "description": "Если файла с входными данными нет, спрашивать ввод в окне перед запуском."
+        }
+      }
+    }
+  }
+}
