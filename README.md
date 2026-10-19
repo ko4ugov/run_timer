@@ -26,14 +26,6 @@ code --install-extension run-timer-0.0.1.vsix
 
 После установки выполните **Ctrl+Shift+P → Developer: Reload Window**.
 
-### Установка Node.js (если его нет)
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-source ~/.bashrc
-nvm install --lts
-```
-
 ## Поддерживаемые языки
 
 | Язык | `languageId` | Команда |
