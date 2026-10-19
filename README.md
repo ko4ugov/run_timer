@@ -24,6 +24,15 @@ vsce package --allow-missing-repository
 code --install-extension run-timer-0.0.1.vsix
 ```
 
+## Установка напрямую
+
+- Скачайте версию Run-timer-x.x.x.vsix из вкладки Release.
+- Установите расширение через терминал:
+
+```bash
+code --install-extension run-timer-0.0.1.vsix
+```
+
 После установки выполните **Ctrl+Shift+P → Developer: Reload Window**.
 
 ## Поддерживаемые языки
