@@ -47,29 +47,10 @@ code --install-extension run-timer-0.0.1.vsix
 
 ```json
 "runTimer.commands": {
-  "typescript": "npx ts-node ${file}",
-  "java": "java ${file}",
-  "php": "php ${file}",
-  "rust": "d=$(mktemp -d) && rustc -O ${file} -o $d/a.out && $d/a.out; rc=$?; rm -rf $d; exit $rc",
-  "c": "d=$(mktemp -d) && gcc -O2 ${file} -o $d/a.out && $d/a.out; rc=$?; rm -rf $d; exit $rc",
-  "cpp": "d=$(mktemp -d) && g++ -O2 ${file} -o $d/a.out && $d/a.out; rc=$?; rm -rf $d; exit $rc"
+  "cpp": "clang++ ${file} -o /tmp/rt_cpp && /tmp/rt_cpp > /dev/null"
 }
 ```
-
-**Как устроены команды для компилируемых языков:**
-
-- `mktemp -d` создаёт уникальную временную папку, параллельные запуски не мешают друг другу
-- `rc=$?` и `exit $rc` сохраняют код возврата программы или компилятора
-- `rm -rf $d` удаляет временные файлы в любом случае
-
-**Без вывода** (для бенчмарков с большим выводом) добавьте `> /dev/null`:
-
-```json
-"cpp": "d=$(mktemp -d) && g++ -O2 ${file} -o $d/a.out && $d/a.out > /dev/null; rc=$?; rm -rf $d; exit $rc"
-```
-
-> Если остановить программу кнопкой во время работы, `rm -rf` может не успеть выполниться, и в `/tmp` останется папка `tmp.XXXXXX`.
-> Удалить вручную: `rm -rf /tmp/tmp.*`
+Теперь у вас доступен бенчмарк на C++!
 
 ## Входные данные (stdin)
 
